@@ -58,7 +58,8 @@ cd %rust_home%
   +server.worldsize %rust_server_worldsize% ^
   -batchmode ^
   -logfile .\log.txt
-  -nographics
+  -nographics ^
+  -silent-crashes
 
 endlocal
 pause
