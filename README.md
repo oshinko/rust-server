@@ -19,3 +19,23 @@ Steam で配信されている Rust のカスタムサーバーに関するリ�
 cd \path\to\repo
 .\start.bat
 ```
+
+## Linux サーバーを起動
+
+コミュニティサーバーを公開する場合に使用します。
+
+```sh
+sh ./start-linux.sh
+```
+
+### 留意点
+
+- AWS EC2 t3a.large (メモリ 8GB, ストレージ 32GB) で実権済み
+- AWS EC2 t3a.medium (メモリ 4GB) では起動しなかった
+
+## 備考
+
+### RustDedicated コマンド
+
+- コマンドライン引数 `+rcon.password` に `password` を設定すると rcon が有効にならない
+- コミュニティサーバーとしてゲーム内に表示するためには `+server.hostname` 以外の情報が必要

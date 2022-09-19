@@ -46,18 +46,19 @@ cd %rust_home%
 
 @REM Rust サーバーを起動
 .\RustDedicated.exe ^
-  +rcon.password password ^
+  +rcon.password my_password ^
   +rcon.port 28016 ^
   +rcon.web 1 ^
   +server.identity "%rust_server_id%" ^
   +server.level "Procedural Map" ^
   +server.maxplayers 10 ^
   +server.port 28015 ^
+  +server.saveinterval 10 ^
   +server.seed 1234 ^
-  +server.tickrate ^
+  +server.tickrate 10 ^
   +server.worldsize %rust_server_worldsize% ^
   -batchmode ^
-  -logfile .\log.txt
+  -logfile .\log.txt ^
   -nographics ^
   -silent-crashes
 
