@@ -38,4 +38,5 @@ sh ./start-linux.sh
 ### RustDedicated コマンド
 
 - コマンドライン引数 `+rcon.password` に `password` を設定すると rcon が有効にならない
-- コミュニティサーバーとしてゲーム内に表示するためには `+server.hostname` 以外の情報が必要
+- コミュニティサーバーとしてゲーム内に表示するためには `+server.hostname` 以外の情報が必要 (?)
+  - 時間が経てば一覧に表示されるとの情報もある
