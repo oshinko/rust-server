@@ -13,14 +13,14 @@ if "%rust_home%" == "" (
   set rust_home=%~dp0\data
 )
 
-if "%rust_server_id%" == "" (
+if "%rust_server_identity%" == "" (
   @REM Rust サーバーの ID が設定されていない場合、デフォルト値を設定
-  set rust_server_id="my-rust-server"
+  set rust_server_identity="my-rust-server"
 )
 
 if "%rust_server_worldsize%" == "" (
   @REM Rust サーバーのワールドサイズが設定されていない場合、デフォルト値を設定
-  set rust_server_worldsize=3000
+  set rust_server_worldsize=6000
 )
 
 if exist "%steamcmd%" (
@@ -49,7 +49,7 @@ cd %rust_home%
   +rcon.password my_password ^
   +rcon.port 28016 ^
   +rcon.web 1 ^
-  +server.identity "%rust_server_id%" ^
+  +server.identity "%rust_server_identity%" ^
   +server.level "Procedural Map" ^
   +server.maxplayers 10 ^
   +server.port 28015 ^
