@@ -1,0 +1,30 @@
+version: '3.7'
+
+services:
+  app:
+    image: debian:bullseye-slim
+    container_name: rust-server
+    working_dir: /app
+    command: sh ./start.sh
+    environment:
+      DISABLE_AUTO_UPDATE: ${DISABLE_AUTO_UPDATE}
+      RCON_IP: ${RCON_IP}
+      RCON_PASSWORD: ${RCON_PASSWORD}
+      RCON_PORT: ${RCON_PORT}
+      RCON_WEB: ${RCON_WEB}
+      SERVER_HOSTNAME: ${SERVER_HOSTNAME}
+      SERVER_IDENTITY: ${SERVER_IDENTITY}
+      SERVER_IP: ${SERVER_IP}
+      SERVER_LEVEL: ${SERVER_LEVEL}
+      SERVER_MAXPLAYERS: ${SERVER_MAXPLAYERS}
+      SERVER_PORT: ${SERVER_PORT}
+      SERVER_SAVEINTERVAL: ${SERVER_SAVEINTERVAL}
+      SERVER_SEED: ${SERVER_SEED}
+      SERVER_TICKRATE: ${SERVER_TICKRATE}
+      SERVER_WORLDSIZE: ${SERVER_WORLDSIZE}
+    ports:
+      - '28015:28015'
+      - '28016:28016'
+    volumes:
+      - .:/app
+    restart: ${RESTART_POLICY}

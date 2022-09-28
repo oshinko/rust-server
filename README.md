@@ -25,13 +25,28 @@ cd \path\to\repo
 コミュニティサーバーを公開する場合に使用します。
 
 ```sh
-sh ./start-linux.sh
+cp .env.template .env
+. .env
+sh ./start.sh
 ```
 
-### 留意点
+留意点は次の通り。
 
 - AWS EC2 t3a.large (メモリ 8GB, ストレージ 32GB) で実権済み
 - AWS EC2 t3a.medium (メモリ 4GB) では起動しなかった
+
+## Docker 環境でサーバーを起動
+
+Docker でサーバーを起動する場合に使用します。
+
+```sh
+cp .env.template .env
+docker-compose up -d
+```
+
+留意点は次の通り。
+
+- Docker Desktop (Windows) では、正常に起動したように見えるものの、クライアントから接続できない
 
 ## 備考
 

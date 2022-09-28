@@ -8,19 +8,24 @@ if "%steamcmd%" == "" (
   set steamcmd=%userprofile%\steamcmd\steamcmd.exe
 )
 
-if "%rust_home%" == "" (
+if "%force_install_dir%" == "" (
   @REM Rust サーバーのインストールパスが設定されていない場合、デフォルト値を設定
-  set rust_home=%~dp0\data
+  set force_install_dir=%~dp0\data\Windows
 )
 
-if "%rust_server_identity%" == "" (
+if "%rcon_password%" == "" (
+  @REM Rust RCON のパスワードが設定されていない場合、デフォルト値を設定
+  set rcon_password=my_password
+)
+
+if "%server_identity%" == "" (
   @REM Rust サーバーの ID が設定されていない場合、デフォルト値を設定
-  set rust_server_identity="my-rust-server"
+  set server_identity="my-rust-server"
 )
 
-if "%rust_server_worldsize%" == "" (
+if "%server_worldsize%" == "" (
   @REM Rust サーバーのワールドサイズが設定されていない場合、デフォルト値を設定
-  set rust_server_worldsize=6000
+  set server_worldsize=6000
 )
 
 if exist "%steamcmd%" (
@@ -37,26 +42,26 @@ if exist "%steamcmd%" (
 
 @REM Rust サーバーファイルを更新
 %steamcmd% ^
-  +force_install_dir %rust_home% ^
+  +force_install_dir %force_install_dir% ^
   +login anonymous ^
   +app_update 258550 validate ^
   +quit
 
-cd %rust_home%
+cd %force_install_dir%
 
 @REM Rust サーバーを起動
 .\RustDedicated.exe ^
-  +rcon.password my_password ^
+  +rcon.password "%rcon_password%" ^
   +rcon.port 28016 ^
   +rcon.web 1 ^
-  +server.identity "%rust_server_identity%" ^
+  +server.identity "%server_identity%" ^
   +server.level "Procedural Map" ^
   +server.maxplayers 10 ^
   +server.port 28015 ^
   +server.saveinterval 10 ^
   +server.seed 1234 ^
   +server.tickrate 10 ^
-  +server.worldsize %rust_server_worldsize% ^
+  +server.worldsize %server_worldsize% ^
   -batchmode ^
   -logfile .\log.txt ^
   -nographics ^
