@@ -1,3 +1,5 @@
+set -e
+
 if [ "$STEAMCMD" = "" ]; then
   STEAMCMD=$HOME/Steam/steamcmd.sh
 fi
@@ -41,6 +43,7 @@ else
       apt install -y curl lib32gcc-s1
     elif type yum > /dev/null 2>&1; then
       # On Fedora, Red Hat Enterprise Linux and other yum based systems
+      yum update
       yum install -y curl glibc.i686 libstdc++.i686
     fi
 

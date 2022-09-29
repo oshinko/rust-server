@@ -27,7 +27,7 @@ cd \path\to\repo
 ```sh
 cp .env.template .env
 . .env
-sh ./start.sh
+sudo STEAMCMD=$HOME/Steam/steamcmd.sh sh ./start.sh
 ```
 
 留意点は次の通り。
@@ -39,9 +39,17 @@ sh ./start.sh
 
 Docker でサーバーを起動する場合に使用します。
 
+Linux 環境の場合、次のコマンドで Docker をインストールします。
+
+```sh
+sudo sh ./install-docker.sh
+```
+
+サーバーを起動します。
+
 ```sh
 cp .env.template .env
-docker-compose up -d
+sudo docker-compose up -d
 ```
 
 留意点は次の通り。
