@@ -1,5 +1,7 @@
 set -e
 
+. /etc/os-release
+
 if [ "$STEAMCMD" = "" ]; then
   STEAMCMD=$HOME/Steam/steamcmd.sh
 fi
@@ -63,11 +65,13 @@ else
   echo "Rust seems to be installed, skipping automatic update"
 fi
 
-# Rust includes *.so we need to tell the OS where it exists
-LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$FORCE_INSTALL_DIR/RustDedicated_Data/Plugins/x86_64
-LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$FORCE_INSTALL_DIR/RustDedicated_Data/Plugins
-LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$FORCE_INSTALL_DIR
-export LD_LIBRARY_PATH
+if [ "$ID" != "amzn" ]; then
+  # Rust includes *.so we need to tell the OS where it exists
+  LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$FORCE_INSTALL_DIR/RustDedicated_Data/Plugins/x86_64
+  LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$FORCE_INSTALL_DIR/RustDedicated_Data/Plugins
+  LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$FORCE_INSTALL_DIR
+  export LD_LIBRARY_PATH
+fi
 
 # Apply patch for SqliteException
 # ref: https://umod.org/index.php/community/rust/43361-sqliteexception-server-not-starting?page=4#post-49
