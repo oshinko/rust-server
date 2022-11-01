@@ -27,6 +27,21 @@ if [ "$enable_auto_update" = "true" ] || \
   update_or_install=true
 fi
 
+if type apt > /dev/null 2>&1; then
+  # On Debian, Ubuntu, and other apt based systems
+  pm=apt
+elif type yum > /dev/null 2>&1; then
+  # On Fedora, Red Hat Enterprise Linux and other yum based systems
+  pm=yum
+else
+  echo "Could not find package manager"
+  exit 1
+fi
+
+# Update package manager
+$pm update
+$pm install -y curl
+
 if ls $STEAMCMD > /dev/null 2>&1; then
   echo "SteamCMD was found in $STEAMCMD"
 else
@@ -34,21 +49,9 @@ else
 
   if [ "$update_or_install" = "true" ]; then
     echo "Install SteamCMD to $STEAMCMD"
-
     steamcmd_home=`dirname $STEAMCMD`
     mkdir -p $steamcmd_home
     cd $steamcmd_home
-
-    if type apt > /dev/null 2>&1; then
-      # On Debian, Ubuntu, and other apt based systems
-      apt update
-      apt install -y curl lib32gcc-s1
-    elif type yum > /dev/null 2>&1; then
-      # On Fedora, Red Hat Enterprise Linux and other yum based systems
-      yum update
-      yum install -y curl glibc.i686 libstdc++.i686
-    fi
-
     curl -sqL "https://steamcdn-a.akamaihd.net/client/installer/steamcmd_linux.tar.gz" | tar zxvf -
   fi
 fi
@@ -56,6 +59,16 @@ fi
 if [ "$update_or_install" = "true" ]; then
   echo "Install or update Rust server"
 
+  # Install dependencies
+  if [ "$pm" = "apt" ]; then
+    deps="lib32gcc-s1"
+  elif [ "$pm" = "yum" ]; then
+    deps="glibc.i686 libstdc++.i686"
+  fi
+
+  $pm install -y $deps
+
+  # Install or update Rust server
   $STEAMCMD \
     +force_install_dir $FORCE_INSTALL_DIR \
     +login anonymous \
