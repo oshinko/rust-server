@@ -42,7 +42,7 @@ Docker でサーバーを起動する場合に使用します。
 Linux 環境の場合、次のコマンドで Docker をインストールします。
 
 ```sh
-curl https://raw.githubusercontent.com/oshinko/ops/wip/src/install/docker-on-linux.sh | sudo sh
+curl https://raw.githubusercontent.com/oshinko/ops/main/src/install/docker-on-linux.sh | sudo sh
 ```
 
 サーバーを起動します。
